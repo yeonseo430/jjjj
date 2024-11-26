@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>경기 결과 조회</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: lightyellow; /* 배경색 추가 */
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin: 20px 0;
+    }
+
+    .results-container {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin: 20px auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 10%; /* 크기 조정 */
+      padding: 5px; /* 패딩 조정 */
+      margin: 10px auto; /* 가운데 정렬 */
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: gold;
+      color: black;
+      border: none;
+      padding: 5px 15px; /* 크기 줄이기 */
+      cursor: pointer;
+      font-size: 14px; /* 글씨 크기 줄이기 */
+      border-radius: 10px; /* 둥근 모서리 */
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      margin: 10px auto; /* 가운데 정렬 */
+    }
+
+    button:hover {
+      background-color: deepskyblue;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    button:active {
+      background-color: deepskyblue;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: translateY(2px);
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    footer button {
+      background-color: gold;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    footer button:hover {
+      background-color: deepskyblue;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    footer button:active {
+      background-color: deepskyblue;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: translateY(2px);
+    }
+
+    p {
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>경기 결과 조회</h1>
+  <label>날짜:</label>
+  <input type="date" id="select-date"><br>
+  <button onclick="viewResults()">결과 조회</button>
+
+  <div id="results-container" class="results-container"></div>
+
+  <footer>
+    <button onclick="location.href='index.html'">홈으로 돌아가기</button>
+  </footer>
+
+  <script>
+    function viewResults() {
+      const selectedDate = document.getElementById("select-date").value;
+      const storedResults = JSON.parse(localStorage.getItem("gameResults")) || [];
+      const filteredResults = storedResults.filter(result => result.date === selectedDate);
+
+      const resultsContainer = document.getElementById("results-container");
+      resultsContainer.innerHTML = ""; // 이전 결과 지우기
+
+      if (filteredResults.length > 0) {
+        filteredResults.forEach(result => {
+          const resultElement = document.createElement("div");
+          resultElement.textContent = `${result.date} - ${result.sport}: ${result.result}`;
+          resultsContainer.appendChild(resultElement);
+        });
+      } else {
+        resultsContainer.innerHTML = "<p>결과가 없습니다.</p>";
+      }
+    }
+  </script>
+</body>
+
+</html>

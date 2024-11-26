@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>대진표</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: lightyellow;
+      margin: 0;
+      padding: 20px 0 60px;
+    }
+
+    .button-container {
+      margin: 20px 0;
+    }
+
+    .button-container button {
+      background-color: gold;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 10px;
+      margin: 5px;
+    }
+
+    .button-container button:hover {
+      background-color: deepskyblue;
+    }
+
+    .table-container {
+      display: none;
+      margin-top: 20px;
+    }
+
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 80%;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: gold;
+    }
+
+    h3 {
+      margin-top: 20px;
+    }
+
+    footer {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: black;
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    footer button {
+      background-color: gold;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    footer button:hover {
+      background-color: deepskyblue;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>2024년 2학기 연행스 대진표</h1>
+
+  <!-- Buttons for sports -->
+  <div class="button-container">
+    <button onclick="showTables('축구')">축구</button>
+    <button onclick="showTables('농구')">농구</button>
+    <button onclick="showTables('여자배드민턴')">여자배드민턴</button>
+  </div>
+
+  <!-- 축구 -->
+  <div id="축구" class="table-container">
+    <h2>축구 대진표</h2>
+    <h3>9월</h3>
+    <table>
+      <tr>
+        <th>날짜</th>
+        <th>경기</th>
+      </tr>
+      <tr>
+        <td>9일</td>
+        <td>Ace Fullham vs 한방능이백숙</td></tr>
+      <tr>
+       <td>10일</td>
+        <td>분쇄기 FC vs Ace Fullham</td></tr>
+      <tr><td>20일</td><td>한방능이백숙 vs 분쇄기 FC</td></tr>
+        <tr><td>24일</td><td>분쇄기 FC vs Ace Fullham</td></tr>
+        <tr><td>25일</td><td>Ace Fullham vs 한방능이백숙</td></tr>
+        <tr><td>27일</td><td>Ace Fullham vs 한방능이백숙</td></tr>
+      </table>
+      <h3>10월</h3>
+      <table>
+        <tr>
+          <th>날짜</th>
+          <th>경기</th>
+        </tr>
+        <tr><td>23일</td><td>Ace Fullham vs 한방능이백숙</td></tr>
+        <tr><td>24일</td><td>분쇄기 FC vs Ace Fullham</td></tr>
+        <tr><td>25일</td><td>Ace Fullham vs 한방능이백숙</td></tr>
+    </table>
+    <h3>11월</h3>
+      <table>
+        <tr>
+          <th>날짜</th>
+          <th>경기</th>
+        </tr>
+        <tr><td>4일</td><td>한방능이백숙 vs 분쇄기 FC</td></tr>
+        <tr><td>5일</td><td>분쇄기 FC vs Ace Fullham</td></tr>
+        <tr><td>6일</td><td>Ace Fullham vs 한방능이백숙</td></tr>
+        <tr><td>15일</td><td>분쇄기 FC vs Ace Fullham</td></tr>
+        <tr><td>18일</td><td>Ace Fullham vs 한방능이백숙</td></tr>
+        <tr><td>19일</td><td>한방능이백숙 vs 분쇄기 FC</td></tr>
+    </table>
+  </div>
+
+  <!-- 농구 -->
+  <div id="농구" class="table-container">
+    <h2>농구 대진표</h2>
+    <h3>9월</h3>
+    <table>
+      <tr>
+        <th>날짜</th>
+        <th>경기</th>
+      </tr>
+      <tr>
+        <td>18일</td>
+        <td>We vs 전동</td>
+      </tr>
+      <tr><td>19일</td><td>전동 vs WT</td></tr>
+        <tr><td>23일</td><td>WT vs We</td></tr>
+      </table>
+      <h3>10월</h3>
+      <table>
+        <tr>
+          <th>날짜</th>
+          <th>경기</th>
+        </tr>
+        <tr><td>8일</td><td>전동 vs WT</td></tr>
+        <tr><td>9일</td><td>WT vs We</td></tr>
+        <tr><td>11일</td><td>We vs 전동</td></tr>
+        <tr><td>28일</td><td>We vs 전동</td></tr>
+        <tr><td>29일</td><td>전동 vs WT</td></tr>
+      </table>
+      <h3>11월</h3>
+      <table>
+        <tr>
+          <th>날짜</th>
+          <th>경기</th>
+        </tr>
+        <tr><td>11일</td><td>We vs 전동</td></tr>
+        <tr><td>12일</td><td>전동 vs WT</td></tr>
+        <tr><td>14일</td><td>WT vs We</td></tr>
+        <tr><td>20일</td><td>전동 vs WT</td></tr>
+        <tr><td>21일</td><td>WT vs We</td></tr>
+        <tr><td>25일</td><td>We vs 전동</td></tr>
+    </table>
+  </div>
+
+  <!-- 여자배드민턴 -->
+  <div id="여자배드민턴" class="table-container">
+    <h2>여자배드민턴 대진표</h2>
+    <table>
+      <tr>
+        <th>날짜</th>
+        <th>경기</th>
+        <h3>9월</h3>
+      </tr>
+      <tr>
+        <td>9일</td>
+        <td>오지 vs z flip3 / 정이 vs 시조새 / 파리채 vs 플라잉팬더스</td>
+      </tr>
+      <tr><td>10일</td><td>z flip 3 vs 정이 / 시조새 vs 파리채 / 오지 vs 플라잉팬더스</td></tr>
+        <tr><td>11일</td><td>오지 vs 정이 / z flip 3 vs 파리채 / 시조새 vs 플라잉팬더스</td></tr>
+        <tr><td>12일</td><td>오지 vs 시조새 / z flip 3 vs 플라잉팬더스 / 정이 vs 파리채</td></tr>
+        <tr><td>18일</td><td>오지 vs 파리채 / z flip 3 vs 시조새</td></tr>
+        <tr><td>19일</td><td>정이 vs 플라잉팬더스</td></tr>
+        <tr><td>25일</td><td>오지 vs z flip3 / 정이 vs 시조새 / 파리채 vs 플라잉팬더스</td></tr>
+        <tr><td>26일</td><td>z flip 3 vs 정이 / 시조새 vs 파리채 / 오지 vs 플라잉팬더스</td></tr>
+      </table>
+      <table>
+        <tr>
+          <th>날짜</th>
+          <th>경기</th>
+           <h3>10월</h3>
+        </tr>
+        <tr><td>8일</td><td>오지 vs 정이 / z flip 3 vs 파리채 / 시조새 vs 플라잉팬더스</td></tr>
+        <tr><td>9일</td><td>오지 vs 시조새 / z flip 3 vs 플라잉팬더스 / 정이 vs 파리채</td></tr>
+        <tr><td>10일</td><td>오지 vs 파리채 / z flip 3 vs 시조새 / 정이 vs 플라잉팬더스</td></tr>
+      </table>
+      <h3>11월</h3>
+      <table>
+        <tr>
+          <th>날짜</th>
+          <th>경기</th>
+        </tr>
+        <tr><td>4일</td><td>오지 vs 파리채 / z flip 3 vs 시조새 / 정이 vs 플라잉팬더스</td></tr>
+        <tr><td>5일</td><td>오지 vs z flip3 / 정이 vs 시조새 / 파리채 vs 플라잉팬더스</td></tr>
+        <tr><td>6일</td><td>z flip 3 vs 정이 / 시조새 vs 파리채 / 오지 vs 플라잉팬더스</td></tr>
+        <tr><td>7일</td><td>오지 vs 정이 / z flip 3 vs 파리채 / 시조새 vs 플라잉팬더스</td></tr>
+        <tr><td>8일</td><td>오지 vs 시조새 / z flip 3 vs 플라잉팬더스 / 정이 vs 파리채</td></tr>
+        <tr><td>11일</td><td>오지 vs 파리채 / z flip 3 vs 시조새</td></tr>
+        <tr><td>12일</td><td>정이 vs 플라잉팬더스</td></tr>
+        <tr><td>18일</td><td>오지 vs z flip3 / 정이 vs 시조새 / 파리채 vs 플라잉팬더스</td></tr>
+        <tr><td>19일</td><td>z flip 3 vs 정이 / 시조새 vs 파리채 / 오지 vs 플라잉팬더스</td></tr>
+        <tr><td>20일</td><td>오지 vs 정이 / z flip 3 vs 파리채</td></tr>
+        <tr><td>21일</td><td>시조새 vs 플라잉팬더스</td></tr>
+        <tr><td>22일</td><td>오지 vs 시조새 / z flip 3 vs 플라잉팬더스 / 정이 vs 파리채</td></tr>
+        <tr><td>25일</td><td>오지 vs 파리채 / z flip 3 vs 시조새 / 정이 vs 플라잉팬더스</td></tr>
+    </table>
+  </div>
+
+  <footer>
+    <button onclick="location.href='index.html'">홈으로 돌아가기</button>
+  </footer>
+
+  <script>
+    function showTables(sport) {
+      const tables = document.querySelectorAll(".table-container");
+
+      tables.forEach(table => {
+        table.style.display = "none"; // Hide all tables
+      });
+
+      if (sport) {
+        document.getElementById(sport).style.display = "block"; // Show selected sport's tables
+      }
+    }
+  </script>
+</body>
+
+</html>

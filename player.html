@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>선수 소개</title>
+  <style>
+    body {
+      background-color: lightyellow;
+      color: black;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 36px;
+      margin: 20px 0;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    button {
+      background-color: gold;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: deepskyblue;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    button:active {
+      background-color: deepskyblue;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: translateY(2px);
+    }
+
+    .team-list,
+    .player-list,
+    .search-result {
+      margin: 20px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 80%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .team-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      margin-top: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>선수 소개</h1>
+
+  <div class="button-container">
+    <button onclick="showTeams('축구')">축구</button>
+    <button onclick="showTeams('농구')">농구</button>
+    <button onclick="showTeams('여자배드민턴')">여자배드민턴</button>
+  </div>
+
+  <div id="team-list" class="team-list">
+    <p>종목 버튼을 눌러 팀을 확인하세요.</p>
+  </div>
+
+  <div id="player-list" class="player-list" style="display: none;">
+    <p>팀 버튼을 눌러 선수들을 확인하세요.</p>
+  </div>
+
+  <div class="search-bar" style="text-align: center; margin: 20px;">
+    <input type="text" id="search-input" placeholder="선수 이름을 입력하세요" style="padding: 10px; font-size: 16px;">
+    <button onclick="searchPlayer()">검색</button>
+  </div>
+
+  <div id="search-result" class="search-result" style="display: none;">
+    <p>검색 결과가 여기에 표시됩니다.</p>
+  </div>
+
+  <footer>
+    <button onclick="navigateToHome()">홈으로 돌아가기</button>
+  </footer>
+
+  <script>
+    const teams = {
+      축구: {
+        "Ace Fullham": ["송영찬", "장서택", "최태현", "장계상", "이상헌", "김민규", "김준성", "송영윤", "함강산", "배규현", "손홍민"],
+        "분쇄기FC": ["송성재", "이종목", "김민준", "송지한", "하현빈", "오성준", "김준형", "노연우"],
+        "한방능이백숙": ["임영균", "이세준", "이상현", "오신혁", "조경민", "박규철", "이강현", "성유찬"]
+      },
+      농구: {
+        "we": ["천세훈", "허진혁", "양영우", "이다훈", "조경빈", "정민규", "정원지"],
+        "전동": ["송지한", "이상민", "박정민", "오성준", "노연우", "이정윤", "유민우", "이성훈"],
+        "WT": ["성공찬", "성유찬", "조경민", "송성재", "장문혁", "배문규", "이상현", "이세준"]
+      },
+      여자배드민턴: {
+        "정이": ["이다혜", "정한나"],
+        "파리채": ["강서현", "이주경"],
+        "오지": ["오서영", "지사라"],
+        "시조새": ["정서연", "박규림"],
+        "z flip3": ["박채영", "윤소현"],
+        "플라잉팬더스": ["김채은", "김지아"]
+      }
+    };
+
+    function showTeams(sport) {
+      const teamList = document.getElementById("team-list");
+      const playerList = document.getElementById("player-list");
+      playerList.style.display = "none";
+      teamList.innerHTML = "";
+
+      const selectedTeams = teams[sport];
+      if (selectedTeams) {
+        Object.keys(selectedTeams).forEach((team, index) => {
+          const teamButton = document.createElement("button");
+          teamButton.textContent = team;
+          teamButton.style.flex = "1 1 30%";
+          teamButton.onclick = () => showPlayers(sport, team);
+          teamList.appendChild(teamButton);
+        });
+      } else {
+        teamList.innerHTML = "<p>팀 정보를 찾을 수 없습니다.</p>";
+      }
+    }
+
+    function showPlayers(sport, team) {
+      const playerList = document.getElementById("player-list");
+      playerList.style.display = "block"; // 선수 목록 보이기
+      playerList.innerHTML = `<h3>${team}팀</h3>`; // 팀 이름 표시
+
+      const players = teams[sport]?.[team]; // 선수 목록 가져오기
+
+      if (players && players.length > 0) {
+        players.forEach(player => {
+          const playerElement = document.createElement("div");
+          playerElement.textContent = player;
+          playerList.appendChild(playerElement);
+        });
+      } else {
+        playerList.innerHTML += "<p>선수 정보를 찾을 수 없습니다.</p>";
+      }
+    }
+
+    function searchPlayer() {
+      const searchInput = document.getElementById("search-input").value.trim();
+      const resultDiv = document.getElementById("search-result");
+      resultDiv.style.display = "none";
+      resultDiv.innerHTML = "";
+
+      if (searchInput === "") {
+        resultDiv.innerHTML = "<p>선수 이름을 입력하세요.</p>";
+        resultDiv.style.display = "block";
+        return;
+      }
+
+      let found = false;
+      for (const sport in teams) {
+        for (const team in teams[sport]) {
+          if (teams[sport][team].includes(searchInput)) {
+            resultDiv.innerHTML += `<p>${searchInput} 선수는 <b>${sport}</b>종목의 <b>${team}</b>팀에 속해있습니다.</p>`;
+            found = true;
+          }
+        }
+      }
+
+      if (!found) {
+        resultDiv.innerHTML = "<p>해당 선수를 찾을 수 없습니다.</p>";
+      }
+
+      resultDiv.style.display = "block";
+    }
+
+    function navigateToHome() {
+      location.href = "index.html";
+    }
+  </script>
+</body>
+
+</html>

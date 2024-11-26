@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>경기 결과 초기화</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: lightyellow;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin: 20px 0;
+    }
+
+    .form-container,
+    .options-container {
+      display: none;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin: 20px auto;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0;
+    }
+
+    /* 비밀번호 입력 칸 */
+      input[type="password"] {
+        width: 15%; /* 비밀번호 입력 칸의 너비를 좁혀줍니다. */
+        padding: 10px; /* 여백을 줄여서 크기를 줄입니다. */
+        margin: 10px auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 10px; /* 글자 크기 10px로 설정 */
+      }
+    }
+
+    /* 날짜 선택 입력 칸 */
+    input[type="date"] {
+      width: 100%; /* 날짜 선택 칸은 전체 너비로 설정 */
+      padding: 15px;
+      margin: 10px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+
+    .button {
+      background-color: gold;
+      color: black;
+      border: none;
+      padding: 10px 20px; /* result.html과 동일한 버튼 크기 */
+      cursor: pointer;
+      font-size: 16px; /* 글자 크기 조정 */
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      width: auto; /* 자동 너비로 설정 */
+      margin: 10px auto; /* 가운데 정렬 */
+    }
+
+    .button:hover {
+      background-color: deepskyblue;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .button:active {
+      background-color: deepskyblue;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: translateY(2px);
+    }
+
+    p {
+      margin: 0;
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    footer button {
+      background-color: gold;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    footer button:hover {
+      background-color: deepskyblue;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    footer button:active {
+      background-color: deepskyblue;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: translateY(2px);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>경기 결과 초기화</h1>
+  <label>비밀번호:</label>
+  <input type="password" id="password">
+  <button class="button" onclick="checkPassword()">확인</button>
+  <p id="error" style="color:red;"></p>
+
+  <div id="options-container" class="options-container">
+    <h2>초기화 옵션</h2>
+    <button class="button" onclick="resetAllResults()">모든 경기 결과 초기화</button><br><br>
+    <h3>특정 날짜 경기 결과 초기화</h3>
+    <label>날짜:</label>
+    <input type="date" id="select-date"><br>
+    <button class="button" onclick="resetSelectedDateResults()">경기 결과 초기화</button>
+    <p id="reset-message" style="color:red;"></p>
+  </div>
+
+  <footer>
+    <button onclick="location.href='index.html'">홈으로 돌아가기</button>
+  </footer>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("password").value;
+      if (password === "1234") {
+        document.getElementById("options-container").style.display = "block";
+        document.getElementById("error").textContent = "";
+      } else {
+        document.getElementById("error").textContent = "비밀번호가 틀렸습니다.";
+      }
+    }
+
+    function resetAllResults() {
+      if (confirm("정말 모든 경기 결과를 초기화하시겠습니까?")) {
+        localStorage.removeItem("gameResults");
+        alert("모든 경기 결과가 초기화되었습니다.");
+      }
+    }
+
+    function resetSelectedDateResults() {
+      const selectedDate = document.getElementById("select-date").value;
+      const resetMessage = document.getElementById("reset-message");
+
+      if (selectedDate) {
+        let storedResults = JSON.parse(localStorage.getItem("gameResults")) || [];
+        storedResults = storedResults.filter(result => result.date !== selectedDate);
+        localStorage.setItem("gameResults", JSON.stringify(storedResults));
+        resetMessage.style.color = "green";
+        resetMessage.textContent = `${selectedDate}의 경기 결과가 초기화되었습니다.`;
+      } else {
+        resetMessage.style.color = "red";
+        resetMessage.textContent = "날짜를 선택해주세요.";
+      }
+    }
+  </script>
+</body>
+
+</html>

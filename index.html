@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>YKIS 연행스</title>
+  <style>
+    body {
+      background-color: lightyellow;
+      color: black;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    h1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: lightyellow;
+      padding: 20px;
+      margin: 0;
+      margin-bottom: 50px;
+      font-size: 46px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 40px;
+    }
+    ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      justify-content: space-around;
+      padding-top: 40px;
+      margin-top: 60px;
+    }
+    li {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    button {
+      background-color: yellow;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background-color: deepskyblue;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    button:active {
+      background-color: deepskyblue;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: translateY(2px);
+    }
+    .reset-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 5px 10px;
+      font-size: 12px;
+      background-color: pink;
+      border: none;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+    .reset-button:hover {
+      background-color: lightcoral;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+    .reset-button:active {
+      background-color: lightcoral;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: translateY(2px);
+    }
+    .results-container {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin: 0 auto;
+      text-align: center;
+      font-size: 18px;
+    }
+    footer {
+      background-color: black;
+      color: white;
+      padding: 20px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      bottom: 0;
+      margin-top: auto;
+    }
+  </style>
+  <script>
+    function navigateTo(page) {
+      location.href = page;
+    }
+
+    function displayTodayResults() {
+      // 현재 UTC 시간 기준으로 한국 시간으로 변환
+      const now = new Date();
+      const koreaTime = new Date(now.setHours(now.getHours() + 9));  // 한국 시간 (UTC+9)
+      const today = koreaTime.toISOString().split('T')[0];  // 오늘 날짜 (YYYY-MM-DD 형식)
+
+      // 저장된 경기 결과 불러오기
+      const storedResults = JSON.parse(localStorage.getItem("gameResults")) || [];
+      const todayResults = storedResults.filter(result => result.date === today);
+
+      const todayResultsContainer = document.getElementById("today-results");
+      todayResultsContainer.innerHTML = "";
+
+      if (todayResults.length > 0) {
+        todayResults.forEach(result => {
+          const resultElement = document.createElement("div");
+          resultElement.textContent = `${result.sport}: ${result.result}`;
+          todayResultsContainer.appendChild(resultElement);
+        });
+      } else {
+        todayResultsContainer.innerHTML = "<p>오늘의 경기 결과가 없습니다.</p>";
+      }
+    }
+
+    window.onload = displayTodayResults;
+  </script>
+</head>
+<body>
+  <h1>YKIS 연행스</h1>
+  <button class="reset-button" onclick="navigateTo('re.html')">경기 결과 초기화</button>
+  <h2>오늘의 경기 결과</h2>
+  <div id="today-results" class="results-container"></div>
+  <ul>
+    <li><button onclick="navigateTo('dajin.html')">대진표</button></li>
+    <li><button onclick="navigateTo('player.html')">선수 소개</button></li>
+    <li><button onclick="navigateTo('result.html')">경기 결과</button></li>
+    <li><button onclick="navigateTo('input.html')">경기결과 입력</button></li>
+  </ul>
+  <footer>
+    <p>&copy; 2024 YKIS 연행스. All rights reserved.</p>
+  </footer>
+</body>
+</html>

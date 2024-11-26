@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>경기 결과 입력</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-color: lightyellow;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin: 20px 0;
+    }
+
+    .form-container {
+      display: none;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      margin: 20px auto;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+
+    input[type="password"] {
+      width: 10%;
+      padding: 8px;
+      margin: 10px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    input[type="date"], select, input[type="text"] {
+      width: 50%;
+      padding: 10px;
+      margin: 10px auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: gold;
+      color: black;
+      border: none;
+      padding: 10px 20px; /* result.html과 동일한 버튼 크기 */
+      cursor: pointer;
+      font-size: 16px; /* 글자 크기 조정 */
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+      width: auto; /* 자동 너비로 설정 */
+      margin: 10px auto; /* 가운데 정렬 */
+    }
+
+    button:hover {
+      background-color: deepskyblue;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    button:active {
+      background-color: deepskyblue;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: translateY(2px);
+    }
+
+    footer {
+      background-color: black;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    footer button {
+      background-color: gold;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 15px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease;
+    }
+
+    footer button:hover {
+      background-color: deepskyblue;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    footer button:active {
+      background-color: deepskyblue;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      transform: translateY(2px);
+    }
+
+    p#error {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>경기 결과 입력</h1>
+  <label>비밀번호:</label>
+  <input type="password" id="password">
+  <button onclick="checkPassword()">확인</button>
+  <p id="error"></p>
+
+  <div id="form-container" class="form-container">
+    <label>날짜:</label>
+    <input type="date" id="date"><br>
+    <label>종목:</label>
+    <select id="sport">
+      <option value="축구">축구</option>
+      <option value="농구">농구</option>
+      <option value="배드민턴">배드민턴</option>
+    </select><br>
+    <label>경기 결과:</label>
+    <input type="text" id="result"><br>
+    <button onclick="submitResult()">결과 제출</button>
+  </div>
+
+  <footer>
+    <button onclick="location.href='index.html'">홈으로 돌아가기</button>
+  </footer>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("password").value;
+      if (password === "1234") {
+        document.getElementById("form-container").style.display = "block";
+        document.getElementById("error").textContent = "";
+      } else {
+        document.getElementById("error").textContent = "비밀번호가 틀렸습니다.";
+      }
+    }
+
+    function submitResult() {
+      const date = document.getElementById("date").value;
+      const sport = document.getElementById("sport").value;
+      const result = document.getElementById("result").value;
+
+      if (date && sport && result) {
+        const gameResult = { date, sport, result };
+        const storedResults = JSON.parse(localStorage.getItem("gameResults")) || [];
+        storedResults.push(gameResult);
+        localStorage.setItem("gameResults", JSON.stringify(storedResults));
+        alert("경기 결과가 저장되었습니다.");
+        resetForm();
+      } else {
+        alert("모든 항목을 입력해 주세요.");
+      }
+    }
+
+    function resetForm() {
+      document.getElementById("date").value = "";
+      document.getElementById("sport").selectedIndex = 0;
+      document.getElementById("result").value = "";
+    }
+  </script>
+</body>
+
+</html>
